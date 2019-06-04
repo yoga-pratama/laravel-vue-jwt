@@ -22,6 +22,7 @@ Vue.use(VueCookie);
 import App from './App.vue';
 import LoginComponent from './components/LoginComponent.vue';
 import DashboardComponent from './components/DashboardComponent.vue';
+import RegisterComponent from './components/RegisterComponent.vue';
 
 const routes = [
     {
@@ -33,7 +34,7 @@ const routes = [
            if(VueCookie.get('JWTtoken')){
             next();
            }else{
-            next('/login');
+             next('/login');
            }
         }
     },
@@ -42,6 +43,11 @@ const routes = [
         path : '/login',
         component: LoginComponent
     },
+    {
+        name : 'register',
+        path : '/register',
+        component: RegisterComponent
+    }
 
 ];
 

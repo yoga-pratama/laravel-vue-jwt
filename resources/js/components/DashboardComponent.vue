@@ -5,7 +5,7 @@
         <div class="card-header">Dashboarddd</div>
 
         <div class="card-body">
-          Welcome.
+          Welcome. {{ this.$cookie.get('user') }}
           <form @submit.prevent="logout">
             <div class="form-group">
               <button class="btn btn-danger">logout</button>
@@ -20,16 +20,19 @@
 
 <script>
 export default {
+  created() {
+    console.log("created");
+  },
   methods: {
     logout() {
       let uri = "http://api-authentification.test/api/logout";
 
-      const JWTtoken = "Bearer " + this.$cookie.get('JWTtoken');
+      const JWTtoken = "Bearer " + this.$cookie.get("JWTtoken");
       window.axios.defaults.headers.common["Authorization"] = JWTtoken;
       this.axios.get(uri).then(response => {
         if (response) {
-          this.$cookie.delete('JWTtoken');
-          this.$cookie.delete('user');
+          this.$cookie.delete("JWTtoken");
+          this.$cookie.delete("user");
           this.$router.push("/login");
         }
       });
